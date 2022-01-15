@@ -5,26 +5,15 @@ function HomeCategories({ data }) {
   console.log(data);
 
   return (
-    <div className="home__meals">
-      <h2 className="home__meals-title">Meals</h2>
-      <div className="home__meals-meals">
-        {data.map((meal, index) => {
-          return (
-            <div key={index} className="home__meals-meal-wrapper shadow-1">
-              <Image
-                className="meal-card-image"
-                src={meal.meals[0].strMealThumb}
-                layout="fill"
-                priority={true}
-                objectFit="cover"
-              />
-              <div className="meal-card-cover-gradient"></div>
-              <div className="meal-card-content">
-                <h3 className="meal-name">{meal.meals[0].strMeal}</h3>
-              </div>
-            </div>
-          );
-        })}
+    <div className="home__categories">
+      <h2 className="home__categories-title">Categories</h2>
+      <div className="home__categories-categories">
+        <div className="category">{data.meals[0].strCategory}</div>
+        <div className="category">{data.meals[1].strCategory}</div>
+        <div className="category">{data.meals[2].strCategory}</div>
+        <div className="category">{data.meals[3].strCategory}</div>
+        <div className="category">{data.meals[4].strCategory}</div>
+        <div className="category">{data.meals[5].strCategory}</div>
       </div>
     </div>
   );

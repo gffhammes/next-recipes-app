@@ -58,6 +58,12 @@ a {
       align-items: center;
 
       overflow-x: auto;
+      
+      -ms-overflow-style: none;
+      scrollbar-width: none; 
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     &-meal-wrapper {

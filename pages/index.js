@@ -1,24 +1,35 @@
 import Head from "next/head";
 import Image from "next/image";
+import HomeCategories from "../components/HomeCategories";
 import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
 
 export async function getServerSideProps(context) {
   const mealsData = [];
+  var i = 0;
 
-  for (let i = 0; i < 10; i++) {
+  do {
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/random.php`
     );
     const data = await res.json();
 
-    mealsData.push(data);
-  }
+    const found = mealsData.some(el => el.meals[0].mealId === data.meals[0].idMeal);    
+    if (!found) {
+      mealsData.push(data);
+      i++;
+    }
+  } while (i < 10)
 
-  return { props: { mealsData } };
+  const res = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/list.php?c=list`
+  );
+  const categories = await res.json();
+
+  return { props: { mealsData, categories } };
 }
 
-export default function Home({ mealsData }) {
+export default function Home({ mealsData, categories }) {
   return (
     <>
       <Head>
@@ -28,6 +39,7 @@ export default function Home({ mealsData }) {
         <div className="container">
           <SearchBox />
           <HomeMeals data={mealsData} />
+          <HomeCategories data={categories}/>
         </div>
       </div>
     </>

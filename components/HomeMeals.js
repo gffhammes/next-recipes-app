@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function HomeMeals({ data }) {
   console.log(data);
-
+  
   return (
     <div className="home__meals">
       <h2 className="home__meals-title">Meals</h2>
