@@ -10,6 +10,7 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 * {
@@ -117,11 +118,24 @@ a {
   }
 
   &__ingredients {
+
+    &-ingredients {      
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    
     .ingredient-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+
       .ingredient-image {
         position: relative;
-        height: 4rem;
-        width: 4rem;
+        height: 5rem;
+        width: 5rem;
       }
     }
   }

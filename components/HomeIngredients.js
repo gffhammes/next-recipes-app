@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 
 function HomeIngredients({ data }) {
-  console.log(data);
   return (
     <div className="home__ingredients container">
       <h2 className="home__ingredients-title title">Ingredients</h2>
@@ -20,8 +19,12 @@ function HomeIngredients({ data }) {
               </div>
               <h3>{ingredient.strIngredient}</h3>
               <span>
-                {ingredient.recipes.meals ? ingredient.recipes.meals.length : 0}{" "}
-                recipes
+                {ingredient.recipes.meals
+                  ? ingredient.recipes.meals.length +
+                    (ingredient.recipes.meals.length > 1
+                      ? " recipes"
+                      : " recipe")
+                  : ""}
               </span>
             </div>
           );

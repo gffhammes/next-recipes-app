@@ -37,9 +37,9 @@ export async function getServerSideProps(context) {
   );
   const ingredients = await res3.json();
 
-  //getting 20 random ingredients
+  //getting 5 random ingredients
   const shuffled = ingredients.meals.sort(() => 0.5 - Math.random());
-  let randomIngredients = shuffled.slice(0, 20);
+  let randomIngredients = shuffled.slice(0, 5);
 
   //getting the amount of recipes of each ingredient
   const promises = randomIngredients.map(async (ingredient) => {
