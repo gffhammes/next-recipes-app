@@ -10,8 +10,8 @@ function HomeMeals({ data }) {
         {data.map((meal, index) => {
           console.log(meal);
           return (
-            <Link href={`/recipes/${meal.meals[0].idMeal}`}>
-              <a key={index} className="home__meals-meal-wrapper shadow-2">
+            <Link key={meal.meals[0].idMeal} href={`/recipes/${meal.meals[0].idMeal}`}>
+              <a className="home__meals-meal-wrapper shadow-2">
                 <Image
                   className="meal-card-image"
                   alt={meal.meals[0].strMeal}

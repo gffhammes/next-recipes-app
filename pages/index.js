@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
       mealsData.push(data);
       i++;
     }
-  } while (i < 10);
+  } while (i < 5);
 
   //categories
   const res2 = await fetch(
@@ -41,13 +41,11 @@ export async function getServerSideProps(context) {
   const shuffled = ingredients.meals.sort(() => 0.5 - Math.random());
   let randomIngredients = shuffled.slice(0, 5);
 
-  //getting the amount of recipes of each ingredient
+  //getting the total recipes for each ingredient
   const promises = randomIngredients.map(async (ingredient) => {
     const ingredient_name = ingredient.strIngredient
       .replaceAll(" ", "_")
       .toLowerCase();
-
-    ingredient.ingredient_name = ingredient_name;
 
     const res4 = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient_name}`

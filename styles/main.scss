@@ -53,7 +53,7 @@ a {
       width: 100%;
       display: grid;
       grid-template-rows: 17rem;
-      grid-template-columns: repeat(10, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       column-gap: 1rem;
       align-items: center;
 
@@ -138,6 +138,23 @@ a {
         width: 5rem;
       }
     }
+  }
+}
+
+.meal-page {
+  &__back-home {
+    position: absolute;
+    z-index: 50;
+  }
+
+  &__image {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+  }
+
+  &__instructions {
+    white-space: pre-line;
   }
 }
 
