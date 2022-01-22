@@ -18,6 +18,10 @@ export async function getServerSidePaths() {
   };
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Recipe({ data }) {
   console.log(data);
 
@@ -32,7 +36,7 @@ function Recipe({ data }) {
     }
   }
 
-  console.log(ingredients);
+  const mealTags = data.meals[0].strTags.split(",");
 
   return (
     <div>
@@ -53,13 +57,34 @@ function Recipe({ data }) {
           />
         </div>
         <div className="meal-page__infos container">
-          <h1>{data.meals[0].strMeal}</h1>
+          <div className="meal-page__general">
+            <h1>{data.meals[0].strMeal}</h1>
+            <span>{data.meals[0].strArea} {data.meals[0].strCategory}</span>
+            <ul>
+              {mealTags.map((tag, index) => {
+                return <li key={index}>{tag}</li>;
+              })}
+            </ul>
+          </div>
 
           <div className="meal-page__ingredients">
-            <div className="meal-page__ingredient-card"></div>
+            <h2>Ingredients</h2>
+            {ingredients.map((ingredient, index) => {
+              return (
+                <div key={index} className="meal-page__ingredient-card">
+                  <span>
+                    <strong>
+                      {capitalizeFirstLetter(ingredient.name.toLowerCase())}
+                    </strong>{" "}
+                    {ingredient.quantity}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="meal-page__instructions">
+            <h2>Instructions</h2>
             <p>{data.meals[0].strInstructions}</p>
           </div>
         </div>
