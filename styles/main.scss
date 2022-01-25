@@ -19,6 +19,11 @@ a {
   margin: 0;
 }
 
+ul,
+li {
+  list-style-type: none;
+}
+
 .container {
   margin: 0 1rem;
 }
@@ -106,25 +111,24 @@ a {
     &-categories {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      row-gap: .5rem;
-      column-gap: .5rem;
+      row-gap: 0.5rem;
+      column-gap: 0.5rem;
 
       .category-card {
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         background-color: #fff;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
       }
     }
   }
 
   &__ingredients {
-
-    &-ingredients {      
+    &-ingredients {
       display: grid;
       gap: 1rem;
       grid-template-columns: 1fr 1fr;
     }
-    
+
     .ingredient-card {
       display: flex;
       flex-direction: column;
@@ -143,18 +147,102 @@ a {
 
 .meal-page {
   &__back-home {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    //color: #fff;
+    //background-color: #67a936;
+    background-color: rgba(255, 255, 255, 0.836);
+    margin: 1rem 0 0 1rem;
     position: absolute;
     z-index: 50;
   }
 
   &__image {
     position: relative;
-    height: 50vh;
+    height: 55vh;
     width: 100%;
+  }
+
+  &__infos {
+    display: grid;
+    row-gap: 2rem;
+    position: absolute;
+    top: 45vh;
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 1rem 0;
+    background-color: #fff;
+  }
+
+  &__general {
+    .meal-name {
+      color: #67a936;
+      margin-bottom: .5rem;
+    }
+
+    .meal-category {
+      color: #8d8d8d;
+      font-size: 1.25rem;
+    }
+
+    .meal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+      color: #8d8d8d;
+
+      .meal-tag {
+        border: 1px solid #8d8d8d;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      > :not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &__ingredient-card {
+    line-height: 2rem;
   }
 
   &__instructions {
     white-space: pre-line;
+  }
+}
+
+.ingredient-page,
+.category-page {
+  &__meals {
+    &__cards {
+      display: grid;
+      row-gap: 1rem;
+
+      &__card {
+        background-color: #fff;
+        border-radius: .5rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        column-gap: .5rem;
+
+        &-image {
+          border-radius: .5rem 0 0 .5rem;
+          position: relative;
+          height: 5rem;
+          width: 100%;
+
+          > span > img {
+            border-radius: .5rem 0 0 .5rem;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -173,6 +261,10 @@ a {
 
 .shadow-3 {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+  &-reverse {
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.19), 0 -6px 6px rgba(0, 0, 0, 0.23);
+  }
 }
 
 .shadow-4 {

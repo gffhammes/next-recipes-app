@@ -5,7 +5,7 @@ import HomeIngredients from "../components/HomeIngredients";
 import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   //meals
   const mealsData = [];
   var i = 0;
@@ -56,29 +56,6 @@ export async function getServerSideProps(context) {
   });
 
   const ingredientsTest = await Promise.all(promises);
-
-/*
-  randomIngredients.map((ingredient) => {
-    const ingredient_name = ingredient.strIngredient
-      .replaceAll(" ", "_")
-      .toLowerCase();
-
-    ingredient.ingredient_name = ingredient_name;
-
-    const res4 = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient_name}`
-    );
-    const recipes = await res4.json();
-
-    ingredient.recipes = recipes;
-  });*/
-
-  /*for (i = 0; i < 20; i++) {
-    const res4 = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast`
-    );
-    const ingredients = await res4.json();
-  }*/
 
   return { props: { mealsData, categories, randomIngredients } };
 }

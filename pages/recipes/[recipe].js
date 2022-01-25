@@ -36,7 +36,9 @@ function Recipe({ data }) {
     }
   }
 
-  const mealTags = data.meals[0].strTags.split(",");
+  const mealTags = data.meals[0].strTags
+    ? data.meals[0].strTags.split(",")
+    : null;
 
   return (
     <div>
@@ -44,9 +46,9 @@ function Recipe({ data }) {
         <title>{data.meals[0].strMeal}</title>
       </Head>
       <div className="meal-page">
-        <div className="meal-page__back-home">
+        <div className="meal-page__back-home ">
           <Link href={"/"}>
-            <a>&larr;Home</a>
+            <a>&larr; Home</a>
           </Link>
         </div>
         <div className="meal-page__image">
@@ -56,19 +58,33 @@ function Recipe({ data }) {
             objectFit="cover"
           />
         </div>
-        <div className="meal-page__infos container">
-          <div className="meal-page__general">
-            <h1>{data.meals[0].strMeal}</h1>
-            <span>{data.meals[0].strArea} {data.meals[0].strCategory}</span>
-            <ul>
-              {mealTags.map((tag, index) => {
-                return <li key={index}>{tag}</li>;
-              })}
+        <div className="meal-page__infos shadow-3-reverse">
+          <div className="meal-page__general container">
+            <h1 className="meal-name">{data.meals[0].strMeal}</h1>
+            <span className="meal-category">
+              {typeof data.meals[0].strArea != "undefined"
+                ? data.meals[0].strArea
+                : ""}{" "}
+              {data.meals[0].strCategory}
+            </span>
+            <ul className={mealTags ? "meal-tags" : "no-meal-tags"}>
+              {mealTags &&
+                mealTags.map((tag, index) => {
+                  if (tag) {
+                    return (
+                      <li className="meal-tag" key={index}>
+                        {tag}
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
             </ul>
           </div>
 
-          <div className="meal-page__ingredients">
-            <h2>Ingredients</h2>
+          <div className="meal-page__ingredients  container">
+            <h2 className="title">Ingredients</h2>
             {ingredients.map((ingredient, index) => {
               return (
                 <div key={index} className="meal-page__ingredient-card">
@@ -76,15 +92,15 @@ function Recipe({ data }) {
                     <strong>
                       {capitalizeFirstLetter(ingredient.name.toLowerCase())}
                     </strong>{" "}
-                    {ingredient.quantity}
+                    &mdash; {ingredient.quantity}
                   </span>
                 </div>
               );
             })}
           </div>
 
-          <div className="meal-page__instructions">
-            <h2>Instructions</h2>
+          <div className="meal-page__instructions  container">
+            <h2 className="title">Instructions</h2>
             <p>{data.meals[0].strInstructions}</p>
           </div>
         </div>
