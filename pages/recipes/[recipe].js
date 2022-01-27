@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import FooterMenu from "../../components/FooterMenu";
 
 export async function getServerSideProps({ params }) {
   const res1 = await fetch(
@@ -22,8 +23,57 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function vh(v) {
+  var h = Math.max(
+    document.documentElement.clientHeight,
+    window.innerHeight || 0
+  );
+  return (v * h) / 100;
+}
+
+function vw(v) {
+  var w = Math.max(
+    document.documentElement.clientWidth,
+    window.innerWidth || 0
+  );
+  return (v * w) / 100;
+}
+
+const truncate = (input, reqLength) =>
+  input.length > reqLength ? `${input.substring(0, reqLength)}...` : input;
+
 function Recipe({ data }) {
-  console.log(data);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (process.browser && scrollY) {
+    document.getElementById("meal-page__blur-image").style.filter = `blur(${
+      scrollY / 50
+    }px)`;
+    if (scrollY > vh(35)) {
+      document.getElementById("meal-page__meal-name").classList.add("show");
+      document.getElementById("meal-page__meal-name").classList.add("shadow-2");
+    } else {
+      document.getElementById("meal-page__meal-name").classList.remove("show");
+      document
+        .getElementById("meal-page__meal-name")
+        .classList.remove("shadow-2");
+    }
+  }
 
   const ingredients = [];
 
@@ -46,12 +96,10 @@ function Recipe({ data }) {
         <title>{data.meals[0].strMeal}</title>
       </Head>
       <div className="meal-page">
-        <div className="meal-page__back-home ">
-          <Link href={"/"}>
-            <a>&larr; Home</a>
-          </Link>
+        <div className="meal-page__meal-name" id="meal-page__meal-name">
+          <h1 className="meal-name">{truncate(data.meals[0].strMeal, 37)}</h1>
         </div>
-        <div className="meal-page__image">
+        <div className="meal-page__blur-image" id="meal-page__blur-image">
           <Image
             src={data.meals[0].strMealThumb}
             layout={"fill"}
@@ -105,6 +153,7 @@ function Recipe({ data }) {
           </div>
         </div>
       </div>
+      <FooterMenu />
     </div>
   );
 }

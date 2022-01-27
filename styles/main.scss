@@ -146,41 +146,50 @@ li {
 }
 
 .meal-page {
-  &__back-home {
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #444;
-    //color: #fff;
-    //background-color: #67a936;
-    background-color: rgba(255, 255, 255, 0.836);
-    margin: 1rem 0 0 1rem;
-    position: absolute;
-    z-index: 50;
+  &__meal-name {
+    position: fixed;
+    z-index: 100;
+    color: #67a936;
+    padding: 1rem;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 0 0 1rem 1rem;
+    transform: translateY(-100%);
+    transition: all .3s ease;
+
+    &.show {
+      transform: translateY(0);
+    }
   }
 
   &__image {
-    position: relative;
+    position: fixed;
     height: 55vh;
     width: 100%;
+  }
+
+  &__blur-image {
+    position: fixed;
+    height: 40vh;
+    width: 100%;
+    z-index: 15;
   }
 
   &__infos {
     display: grid;
     row-gap: 2rem;
     position: absolute;
-    top: 45vh;
-    border-radius: 1.5rem 1.5rem 0 0;
+    top: 35vh;
+    border-radius: 1rem 1rem 0 0;
     padding: 1rem 0;
     background-color: #fff;
+    z-index: 30;
   }
 
   &__general {
     .meal-name {
       color: #67a936;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     .meal-category {
@@ -191,7 +200,7 @@ li {
     .meal-tags {
       display: flex;
       flex-wrap: wrap;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       color: #8d8d8d;
 
       .meal-tag {
@@ -219,6 +228,28 @@ li {
 
 .ingredient-page,
 .category-page {
+  padding: 2rem 0;
+
+  &__back-home {
+    position: relative;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    background-color: rgb(255, 255, 255);
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+
+    span {
+      color: #67a936;
+    }
+  }
+
   &__meals {
     &__cards {
       display: grid;
@@ -226,24 +257,38 @@ li {
 
       &__card {
         background-color: #fff;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         display: grid;
         grid-template-columns: 1fr 2fr;
-        column-gap: .5rem;
+        column-gap: 0.5rem;
 
         &-image {
-          border-radius: .5rem 0 0 .5rem;
+          border-radius: 0.5rem 0 0 0.5rem;
           position: relative;
           height: 5rem;
           width: 100%;
 
           > span > img {
-            border-radius: .5rem 0 0 .5rem;
+            border-radius: 0.5rem 0 0 0.5rem;
           }
         }
+
+        align-items: center;
       }
     }
   }
+}
+
+.footer__menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+  background-color: #67a936;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
 }
 
 .title {
@@ -257,6 +302,10 @@ li {
 
 .shadow-2 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  &-reverse {
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.16), 0 -3px 6px rgba(0, 0, 0, 0.23);
+  }
 }
 
 .shadow-3 {
