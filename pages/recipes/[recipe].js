@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import FooterMenu from "../../components/FooterMenu";
 
@@ -56,22 +55,16 @@ function Recipe({ data }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (process.browser && scrollY) {
     document.getElementById("meal-page__blur-image").style.filter = `blur(${
       scrollY / 50
     }px)`;
-    if (scrollY > vh(35)) {
+    if (scrollY > vh(40)) {
       document.getElementById("meal-page__meal-name").classList.add("show");
-      document.getElementById("meal-page__meal-name").classList.add("shadow-2");
     } else {
       document.getElementById("meal-page__meal-name").classList.remove("show");
-      document
-        .getElementById("meal-page__meal-name")
-        .classList.remove("shadow-2");
     }
   }
 

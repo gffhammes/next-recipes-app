@@ -1,11 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useContext } from "react";
 import HomeCategories from "../components/HomeCategories";
 import HomeIngredients from "../components/HomeIngredients";
 import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
+import AppContext from "../AppContext";
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   //meals
   const mealsData = [];
   var i = 0;
@@ -57,10 +59,12 @@ export async function getStaticProps(context) {
 
   const ingredientsTest = await Promise.all(promises);
 
-  return { props: { mealsData, categories, randomIngredients } };
+  return { props: { mealsData,  randomIngredients } };
 }
 
-export default function Home({ mealsData, categories, randomIngredients }) {
+export default function Home({ mealsData,  randomIngredients }) {
+  const categories = useContext(AppContext);
+
   return (
     <>
       <Head>

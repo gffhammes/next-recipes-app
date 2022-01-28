@@ -1,18 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import AppContext from "../../AppContext";
 import FooterMenu from "../../components/FooterMenu";
 
 export async function getServerSideProps({ params }) {
+  const strCategory = params.category.split("-")[0];
+  const indexSplit = params.category.split("-");
+  const index = indexSplit.pop();
+
   const res1 = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${params.category}`
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${strCategory}`
   );
   const data = await res1.json();
 
   const category = params.category;
 
-  return { props: { data, category } };
+  return { props: { data, strCategory, index } };
 }
 
 export async function getServerSidePaths() {
@@ -25,33 +30,82 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function vh(v) {
-  var h = Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  );
-  return (v * h) / 100;
+function convertRemToPixels(rem) {
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-function vw(v) {
-  var w = Math.max(
-    document.documentElement.clientWidth,
-    window.innerWidth || 0
-  );
-  return (v * w) / 100;
-}
+function Category({ data, strCategory, index }) {
+  const [scrollY, setScrollY] = useState(0);
 
-function Category({ data, category }) {
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (process.browser && scrollY) {
+    if (scrollY > convertRemToPixels(4)) {
+      document.getElementById("page__title").classList.add("show");
+    } else {
+      document.getElementById("page__title").classList.remove("show");
+    }
+  }
+
+  const categories = useContext(AppContext);
+
+  const nextIndex =
+    parseInt(index) + 1 === categories.meals.length ? 0 : parseInt(index) + 1;
+  const prevIndex =
+    parseInt(index) === 0 ? categories.meals.length - 1 : parseInt(index) - 1;
+
+  const nextStr = categories.meals[nextIndex].strCategory;
+  const prevStr = categories.meals[prevIndex].strCategory;
+
+  const nextSlug = `/categories/${nextStr.toLowerCase()}-${nextIndex}`;
+  const prevSlug = `/categories/${prevStr.toLowerCase()}-${prevIndex}`;
+
   return (
     <div>
       <Head>
-        <title>Category - {capitalizeFirstLetter(category)}</title>
+        <title>Category - {capitalizeFirstLetter(strCategory)}</title>
       </Head>
+      <div id="page__title">
+        <h1>{capitalizeFirstLetter(strCategory)}</h1>
+        <Link href={prevSlug}>
+          <a className="prev-category">
+            <i class="fas fa-chevron-circle-left"></i>
+          </a>
+        </Link>
+        <Link href={nextSlug}>
+          <a className="next-category">
+            <i class="fas fa-chevron-circle-right"></i>
+          </a>
+        </Link>
+      </div>
       <div className="category-page">
         <div className="category-page__meals container">
           <div className="category-page__title">
-            <span>Category</span>
-            <h1>{capitalizeFirstLetter(category)}</h1>
+            <div className="title">
+              <span>Category</span>
+              <h1>{capitalizeFirstLetter(strCategory)}</h1>
+            </div>
+            <Link href={prevSlug}>
+              <a className="prev-category">
+                <i class="fas fa-chevron-circle-left"></i>
+              </a>
+            </Link>
+            <Link href={nextSlug}>
+              <a className="next-category">
+                <i class="fas fa-chevron-circle-right"></i>
+              </a>
+            </Link>
           </div>
           <div className="category-page__meals__cards">
             {data.meals.map((meal) => {

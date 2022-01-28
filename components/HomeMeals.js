@@ -7,8 +7,7 @@ function HomeMeals({ data }) {
     <div className="home__meals">
       <h2 className="home__meals-title title container">Meals</h2>
       <div className="home__meals-meals">
-        {data.map((meal, index) => {
-          console.log(meal);
+        {data.map((meal) => {
           return (
             <Link key={meal.meals[0].idMeal} href={`/recipes/${meal.meals[0].idMeal}`}>
               <a className="home__meals-meal-wrapper shadow-2">
