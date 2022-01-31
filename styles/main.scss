@@ -306,9 +306,8 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: 1.5rem;
-  border-radius: 1rem 1rem 0 0;
-  padding: 1rem;
+  font-size: 1.25rem;
+  padding: .75rem;
 /*
   :not(:last-child) {
     margin-right: 2.5rem;
@@ -325,9 +324,9 @@ li {
   }
 
   &_home {
-    font-size: 1.75rem;
-    height: 3.5rem;
-    width: 3.5rem;
+    font-size: 1.5rem;
+    height: 3rem;
+    width: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
