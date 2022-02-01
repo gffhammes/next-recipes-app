@@ -6,16 +6,11 @@ import HomeIngredients from "../components/HomeIngredients";
 import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
 import AppContext from "../AppContext";
+import FooterMenu from "../components/FooterMenu";
 
 export async function getStaticProps() {
-  //https://www.themealdb.com/api/json/v1/1/search.php?f=a
-  const mealsRes = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?f=a&b`
-  );
-  const mealsData = await mealsRes.json();
-
   //meals
-  /*const mealsData = [];
+  const mealsData = [];
   var i = 0;
 
   do {
@@ -31,7 +26,7 @@ export async function getStaticProps() {
       mealsData.push(data);
       i++;
     }
-  } while (i < 5);*/
+  } while (i < 5);
 
   //categories
   const res2 = await fetch(
@@ -46,23 +41,7 @@ export async function getStaticProps() {
   const ingredients = await res3.json();
 
   //getting 5 random ingredients
-  let randomIngredients = ingredients.meals.slice(0, 4);
-
-  //getting the total recipes for each ingredient
-  const promises = randomIngredients.map(async (ingredient) => {
-    const ingredient_name = ingredient.strIngredient
-      .replaceAll(" ", "_")
-      .toLowerCase();
-
-    const res4 = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient_name}`
-    );
-    const recipes = await res4.json();
-
-    ingredient.recipes = recipes;
-  });
-
-  const ingredientsTest = await Promise.all(promises);
+  let randomIngredients = ingredients.meals.slice(0, 5);
 
   return { props: { mealsData, randomIngredients } };
 }
@@ -77,10 +56,11 @@ export default function Home({ mealsData, randomIngredients }) {
       </Head>
       <div className="home">
         <SearchBox />
-        <HomeMeals data={mealsData.meals} />
+        <HomeMeals data={mealsData} />
         <HomeCategories data={categories} />
         <HomeIngredients data={randomIngredients} />
       </div>
+      <FooterMenu />
     </>
   );
 }

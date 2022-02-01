@@ -15,7 +15,7 @@ function FooterMenu() {
             <i class="fas fa-home" />
           </a>
         </Link>
-        <Link href="/" className="footer__menu_random">
+        <Link href="/meals/random" className="footer__menu_random">
           <a className="footer__menu_random">
             <i class="fas fa-random" />
           </a>

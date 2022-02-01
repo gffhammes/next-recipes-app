@@ -35,29 +35,6 @@ function convertRemToPixels(rem) {
 }
 
 function Category({ data, strCategory, index }) {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  if (process.browser && scrollY) {
-    if (scrollY > convertRemToPixels(4)) {
-      document.getElementById("page__title").classList.add("show");
-    } else {
-      document.getElementById("page__title").classList.remove("show");
-    }
-  }
-
   const categories = useContext(AppContext);
 
   const nextIndex =
@@ -77,12 +54,12 @@ function Category({ data, strCategory, index }) {
         <title>Category - {capitalizeFirstLetter(strCategory)}</title>
       </Head>
       <div id="page__title">
-        <h1>{capitalizeFirstLetter(strCategory)}</h1>
         <Link href={prevSlug}>
           <a className="prev-category">
             <i class="fas fa-chevron-circle-left"></i>
           </a>
         </Link>
+        <h1>{capitalizeFirstLetter(strCategory)}</h1>
         <Link href={nextSlug}>
           <a className="next-category">
             <i class="fas fa-chevron-circle-right"></i>
@@ -91,26 +68,10 @@ function Category({ data, strCategory, index }) {
       </div>
       <div className="category-page">
         <div className="category-page__meals container">
-          <div className="category-page__title">
-            <div className="title">
-              <span>Category</span>
-              <h1>{capitalizeFirstLetter(strCategory)}</h1>
-            </div>
-            <Link href={prevSlug}>
-              <a className="prev-category">
-                <i class="fas fa-chevron-circle-left"></i>
-              </a>
-            </Link>
-            <Link href={nextSlug}>
-              <a className="next-category">
-                <i class="fas fa-chevron-circle-right"></i>
-              </a>
-            </Link>
-          </div>
           <div className="category-page__meals__cards">
             {data.meals.map((meal) => {
               return (
-                <Link key={meal.idMeal} href={`/recipes/${meal.idMeal}`}>
+                <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`}>
                   <a className="category-page__meals__cards__card shadow-2">
                     <div className="category-page__meals__cards__card-image">
                       <Image

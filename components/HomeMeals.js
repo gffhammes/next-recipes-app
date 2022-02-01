@@ -5,28 +5,39 @@ import Link from "next/link";
 function HomeMeals({ data }) {
   return (
     <div className="home__meals">
-      <h2 className="home__meals-title title container">Meals</h2>
-      <div className="home__meals-meals">
-        {data.map((meal) => {
-          return (
-            <Link key={meal.idMeal} href={`/recipes/${meal.idMeal}`}>
-              <a className="home__meals-meal-wrapper shadow-2">
-                <Image
-                  className="meal-card-image"
-                  alt={meal.strMeal}
-                  src={meal.strMealThumb}
-                  layout="fill"
-                  priority={true}
-                  objectFit="cover"
-                />
-                <div className="meal-card-cover-gradient"></div>
-                <div className="meal-card-content">
-                  <h3 className="meal-name">{meal.strMeal}</h3>
-                </div>
-              </a>
-            </Link>
-          );
-        })}
+      <div className="home__meals-title title container">
+        <h2>Random Meals</h2>
+        <Link href="meals">
+          <a>See all</a>
+        </Link>
+      </div>
+
+      <div className="home__meals-meals-wrapper">
+        <div className="home__meals-meals">
+          {data.map((meal) => {
+            return (
+              <Link
+                key={meal.meals[0].idMeal}
+                href={`meals/${meal.meals[0].idMeal}`}
+              >
+                <a className="home__meals-meal-wrapper shadow-2">
+                  <Image
+                    className="meal-card-image"
+                    alt={meal.meals[0].strMeal}
+                    src={meal.meals[0].strMealThumb}
+                    layout="fill"
+                    priority={true}
+                    objectFit="cover"
+                  />
+                  <div className="meal-card-cover-gradient"></div>
+                  <div className="meal-card-content">
+                    <h3 className="meal-name">{meal.meals[0].strMeal}</h3>
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

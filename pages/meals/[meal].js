@@ -4,17 +4,24 @@ import React, { useState, useEffect } from "react";
 import FooterMenu from "../../components/FooterMenu";
 
 export async function getServerSideProps({ params }) {
-  const res1 = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.recipe}`
-  );
-  const data = await res1.json();
+  var res;
+
+  if (params.meal === "random") {
+    res = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+  } else {
+    res = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.meal}`
+    );
+  }
+
+  const data = await res.json();
 
   return { props: { data } };
 }
 
 export async function getServerSidePaths() {
-  const recipe = () => {
-    return { params: { recipe } };
+  const meal = () => {
+    return { params: { meal } };
   };
 }
 
@@ -41,7 +48,7 @@ function vw(v) {
 const truncate = (input, reqLength) =>
   input.length > reqLength ? `${input.substring(0, reqLength)}...` : input;
 
-function Recipe({ data }) {
+function Meal({ data }) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -151,4 +158,4 @@ function Recipe({ data }) {
   );
 }
 
-export default Recipe;
+export default Meal;

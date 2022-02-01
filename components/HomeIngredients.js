@@ -5,7 +5,7 @@ import Link from "next/link";
 function HomeIngredients({ data }) {
   return (
     <div className="home__ingredients container">
-      <h2 className="home__ingredients-title title">Ingredients</h2>
+      <h2 className="home__ingredients-title title">Popular Ingredients</h2>
       <div className="home__ingredients-ingredients">
         {data.map((ingredient, index) => {
           return (
@@ -23,14 +23,6 @@ function HomeIngredients({ data }) {
                   />
                 </div>
                 <h3>{ingredient.strIngredient}</h3>
-                <span>
-                  {ingredient.recipes.meals
-                    ? ingredient.recipes.meals.length +
-                      (ingredient.recipes.meals.length > 1
-                        ? " recipes"
-                        : " recipe")
-                    : ""}
-                </span>
               </a>
             </Link>
           );
