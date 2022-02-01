@@ -7,10 +7,10 @@ function HomeIngredients({ data }) {
     <div className="home__ingredients container">
       <h2 className="home__ingredients-title title">Popular Ingredients</h2>
       <div className="home__ingredients-ingredients">
-        {data.map((ingredient, index) => {
+        {data.meals.slice(0, 5).map((ingredient, index) => {
           return (
             <Link
-              href={`/ingredients/${ingredient.strIngredient.toLowerCase()}`}
+              href={`/ingredients/${ingredient.strIngredient.toLowerCase()}-${index}`}
               key={index}
             >
               <a className="ingredient-card">

@@ -35,15 +35,19 @@ function convertRemToPixels(rem) {
 }
 
 function Category({ data, strCategory, index }) {
-  const categories = useContext(AppContext);
+  const { categoriesData } = useContext(AppContext);
 
   const nextIndex =
-    parseInt(index) + 1 === categories.meals.length ? 0 : parseInt(index) + 1;
+    parseInt(index) + 1 === categoriesData.meals.length
+      ? 0
+      : parseInt(index) + 1;
   const prevIndex =
-    parseInt(index) === 0 ? categories.meals.length - 1 : parseInt(index) - 1;
+    parseInt(index) === 0
+      ? categoriesData.meals.length - 1
+      : parseInt(index) - 1;
 
-  const nextStr = categories.meals[nextIndex].strCategory;
-  const prevStr = categories.meals[prevIndex].strCategory;
+  const nextStr = categoriesData.meals[nextIndex].strCategory;
+  const prevStr = categoriesData.meals[prevIndex].strCategory;
 
   const nextSlug = `/categories/${nextStr.toLowerCase()}-${nextIndex}`;
   const prevSlug = `/categories/${prevStr.toLowerCase()}-${prevIndex}`;

@@ -20,6 +20,12 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
   );
   const categoriesData = await categoriesRes.json();
+
+  const ingredientsRes = await fetch(
+    "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
+  );
+  const ingredientsData = await ingredientsRes.json();
+
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
@@ -29,12 +35,16 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     category.index = index;
   });
 
-  return { pageProps, categoriesData };
+  ingredientsData.meals.map((ingredient, index) => {
+    ingredient.index = index;
+  });
+
+  return { pageProps, categoriesData, ingredientsData };
 };
 
-function MyApp({ Component, pageProps, categoriesData }) {
+function MyApp({ Component, pageProps, categoriesData, ingredientsData }) {
   return (
-    <AppContext.Provider value={categoriesData}>
+    <AppContext.Provider value={{ categoriesData, ingredientsData }}>
       <Component {...pageProps} />
     </AppContext.Provider>
   );

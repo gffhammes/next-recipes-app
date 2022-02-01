@@ -7,10 +7,17 @@ import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
 import AppContext from "../AppContext";
 import FooterMenu from "../components/FooterMenu";
+import {
+  setCookies,
+  getCookie,
+  checkCookies,
+  removeCookies,
+} from "cookies-next";
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
   //meals
-  const mealsData = [];
+  var mealsData = [];
+
   var i = 0;
 
   do {
@@ -47,7 +54,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({ mealsData, randomIngredients }) {
-  const categories = useContext(AppContext);
+  const { categoriesData } = useContext(AppContext);
+  const { ingredientsData } = useContext(AppContext);
+
+  console.log(categoriesData);
+  console.log(ingredientsData);
 
   return (
     <>
@@ -57,8 +68,8 @@ export default function Home({ mealsData, randomIngredients }) {
       <div className="home">
         <SearchBox />
         <HomeMeals data={mealsData} />
-        <HomeCategories data={categories} />
-        <HomeIngredients data={randomIngredients} />
+        <HomeCategories data={categoriesData} />
+        <HomeIngredients data={ingredientsData} />
       </div>
       <FooterMenu />
     </>

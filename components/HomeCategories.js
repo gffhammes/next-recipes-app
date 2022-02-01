@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-function HomeCategories({ data }) {  
-
+function HomeCategories({ data }) {
   return (
     <div className="home__categories container">
       <h2 className="home__categories-title title">Categories</h2>
