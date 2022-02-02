@@ -40,7 +40,7 @@ export async function getServerSideProps(ctx) {
       path: "/",
     });
   } else {
-    mealsData = mealsCookies;
+    mealsData = JSON.parse(mealsCookies);
   }
 
   //--meals
@@ -86,7 +86,7 @@ export default function Home({ mealsData }) {
       </Head>
       <div className="home">
         <SearchBox />
-        <HomeMeals data={JSON.parse(mealsData)} />
+        <HomeMeals data={mealsData} />
         <HomeCategories data={categoriesData} />
         <HomeIngredients data={ingredientsData} />
       </div>

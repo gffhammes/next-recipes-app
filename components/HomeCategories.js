@@ -5,7 +5,12 @@ import Link from "next/link";
 function HomeCategories({ data }) {
   return (
     <div className="home__categories container">
-      <h2 className="home__categories-title title">Categories</h2>
+      <div className="home__categories-title title">
+        <h2>Main Categories</h2>
+        <Link href="/">
+          <a>See all</a>
+        </Link>
+      </div>
       <div className="home__categories-categories">
         {data.meals.slice(0, 6).map((category, index) => {
           return (

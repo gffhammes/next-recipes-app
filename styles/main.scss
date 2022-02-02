@@ -56,17 +56,28 @@ li {
     }
   }
 
-  &__meals {
-    &-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      a {
-        font-weight: bold;
-        color: #67a936;
-      }
+    a {
+      font-weight: bold;
+      color: #67a936;
     }
+  }
+
+  &__meals {
+    // &-title {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: space-between;
+
+    //   a {
+    //     font-weight: bold;
+    //     color: #67a936;
+    //   }
+    //}
 
     &-meals {
       padding: 0 1rem;
