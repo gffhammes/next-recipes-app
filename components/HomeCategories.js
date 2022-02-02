@@ -7,7 +7,7 @@ function HomeCategories({ data }) {
     <div className="home__categories container">
       <h2 className="home__categories-title title">Categories</h2>
       <div className="home__categories-categories">
-        {data.meals.map((category, index) => {
+        {data.meals.slice(0, 6).map((category, index) => {
           return (
             <Link
               href={`/categories/${category.strCategory.toLowerCase()}-${index}`}

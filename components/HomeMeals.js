@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 function HomeMeals({ data }) {
+  console.log(data);
+
   return (
     <div className="home__meals">
       <div className="home__meals-title title container">
@@ -17,21 +19,21 @@ function HomeMeals({ data }) {
           {data.map((meal) => {
             return (
               <Link
-                key={meal.meals[0].idMeal}
-                href={`meals/${meal.meals[0].idMeal}`}
+                key={meal.id}
+                href={`meals/${meal.id}`}
               >
                 <a className="home__meals-meal-wrapper shadow-2">
                   <Image
                     className="meal-card-image"
-                    alt={meal.meals[0].strMeal}
-                    src={meal.meals[0].strMealThumb}
+                    alt={meal.name}
+                    src={meal.thumb}
                     layout="fill"
                     priority={true}
                     objectFit="cover"
                   />
                   <div className="meal-card-cover-gradient"></div>
                   <div className="meal-card-content">
-                    <h3 className="meal-name">{meal.meals[0].strMeal}</h3>
+                    <h3 className="meal-name">{meal.name}</h3>
                   </div>
                 </a>
               </Link>

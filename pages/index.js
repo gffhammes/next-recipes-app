@@ -1,64 +1,83 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import HomeCategories from "../components/HomeCategories";
 import HomeIngredients from "../components/HomeIngredients";
 import HomeMeals from "../components/HomeMeals";
 import SearchBox from "../components/SearchBox";
 import AppContext from "../AppContext";
 import FooterMenu from "../components/FooterMenu";
-import {
-  setCookies,
-  getCookie,
-  checkCookies,
-  removeCookies,
-} from "cookies-next";
+import nookies from "nookies";
 
-export async function getServerSideProps({ req, res }) {
-  //meals
+export async function getServerSideProps(ctx) {
   var mealsData = [];
-
   var i = 0;
 
-  do {
-    const res1 = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/random.php`
-    );
-    const data = await res1.json();
+  const mealsCookies = nookies.get(ctx).RANDOM_MEALS;
 
-    const found = mealsData.some(
-      (el) => el.meals[0].mealId === data.meals[0].idMeal
-    );
-    if (!found) {
-      mealsData.push(data);
-      i++;
-    }
-  } while (i < 5);
+  if (!mealsCookies) {
+    do {
+      const resRandomMeal = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/random.php`
+      );
+      const randomMealData = await resRandomMeal.json();
 
-  //categories
-  const res2 = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/list.php?c=list`
-  );
-  const categories = await res2.json();
+      const found = mealsData.some(
+        (el) => el.id === randomMealData.meals[0].idMeal
+      );
+      if (!found) {
+        mealsData.push({
+          id: randomMealData.meals[0].idMeal,
+          name: randomMealData.meals[0].strMeal,
+          thumb: randomMealData.meals[0].strMealThumb,
+        });
+        i++;
+      }
+    } while (i < 5);
 
-  //getting all ingredients
-  const res3 = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/list.php?i=list`
-  );
-  const ingredients = await res3.json();
+    nookies.set(ctx, "RANDOM_MEALS", JSON.stringify(mealsData), {
+      maxAge: 5 * 60,
+      path: "/",
+    });
+  } else {
+    mealsData = mealsCookies;
+  }
 
-  //getting 5 random ingredients
-  let randomIngredients = ingredients.meals.slice(0, 5);
+  //--meals
+  // var i = 0;
 
-  return { props: { mealsData, randomIngredients } };
+  // do {
+  //   const res1 = await fetch(
+  //     `https://www.themealdb.com/api/json/v1/1/random.php`
+  //   );
+  //   const data = await res1.json();
+
+  //   const found = mealsData.some(
+  //     (el) => el.meals[0].mealId === data.meals[0].idMeal
+  //   );
+  //   if (!found) {
+  //     mealsData.push(data);
+  //     i++;
+  //   }
+  // } while (i < 5);
+
+  // const strMeals = JSON.stringify(mealsData);
+
+  // console.log(strMeals);
+
+  // console.log(typeof strMeals);
+
+  // nookies.set(ctx, "RANDOM_MEALS", strMeals, {
+  //   maxAge: 5 * 60,
+  //   path: "/",
+  // });
+
+  return { props: { mealsData } };
 }
 
-export default function Home({ mealsData, randomIngredients }) {
+export default function Home({ mealsData }) {
   const { categoriesData } = useContext(AppContext);
   const { ingredientsData } = useContext(AppContext);
-
-  console.log(categoriesData);
-  console.log(ingredientsData);
 
   return (
     <>
@@ -67,7 +86,7 @@ export default function Home({ mealsData, randomIngredients }) {
       </Head>
       <div className="home">
         <SearchBox />
-        <HomeMeals data={mealsData} />
+        <HomeMeals data={JSON.parse(mealsData)} />
         <HomeCategories data={categoriesData} />
         <HomeIngredients data={ingredientsData} />
       </div>

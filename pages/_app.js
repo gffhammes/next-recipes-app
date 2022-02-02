@@ -16,11 +16,15 @@ Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
+
+
+  //--categories
   const categoriesRes = await fetch(
     "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
   );
   const categoriesData = await categoriesRes.json();
 
+  //--ingredients
   const ingredientsRes = await fetch(
     "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
   );

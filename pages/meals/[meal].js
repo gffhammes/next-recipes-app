@@ -66,7 +66,7 @@ function Meal({ data }) {
 
   if (process.browser && scrollY) {
     document.getElementById("meal-page__blur-image").style.filter = `blur(${
-      scrollY / 50
+      scrollY <= vh(40) ? scrollY / 50 : vh(40) / 50
     }px)`;
     if (scrollY > vh(40)) {
       document.getElementById("meal-page__meal-name").classList.add("show");
