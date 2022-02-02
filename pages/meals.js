@@ -8,8 +8,12 @@ export default function Meals({}) {
         <title>Meals</title>
       </Head>
       <div className="meals">
-        <h1>Meals</h1>
-
+        <div id="page__title">
+          <h1>Meals</h1>
+        </div>
+        <div className="meals">
+          
+        </div>
         <FooterMenu />
       </div>
     </>

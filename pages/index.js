@@ -43,35 +43,6 @@ export async function getServerSideProps(ctx) {
     mealsData = JSON.parse(mealsCookies);
   }
 
-  //--meals
-  // var i = 0;
-
-  // do {
-  //   const res1 = await fetch(
-  //     `https://www.themealdb.com/api/json/v1/1/random.php`
-  //   );
-  //   const data = await res1.json();
-
-  //   const found = mealsData.some(
-  //     (el) => el.meals[0].mealId === data.meals[0].idMeal
-  //   );
-  //   if (!found) {
-  //     mealsData.push(data);
-  //     i++;
-  //   }
-  // } while (i < 5);
-
-  // const strMeals = JSON.stringify(mealsData);
-
-  // console.log(strMeals);
-
-  // console.log(typeof strMeals);
-
-  // nookies.set(ctx, "RANDOM_MEALS", strMeals, {
-  //   maxAge: 5 * 60,
-  //   path: "/",
-  // });
-
   return { props: { mealsData } };
 }
 

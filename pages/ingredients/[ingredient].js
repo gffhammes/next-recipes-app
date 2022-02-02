@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useContext } from "react";
 import AppContext from "../../AppContext";
 import FooterMenu from "../../components/FooterMenu";
+import MealCard from "../../components/MealCard";
 
 export async function getServerSideProps({ params }) {
   const strIngredient = params.ingredient.split("-")[0];
@@ -109,18 +110,19 @@ function Ingredient({ data, strIngredient, index }) {
           <div className="category-page__meals__cards">
             {data.meals.map((meal) => {
               return (
-                <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`}>
-                  <a className="category-page__meals__cards__card shadow-2">
-                    <div className="category-page__meals__cards__card-image">
-                      <Image
-                        src={meal.strMealThumb}
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
-                    <h3>{meal.strMeal}</h3>
-                  </a>
-                </Link>
+                <MealCard meal={meal} />
+                // <Link key={meal.idMeal} href={`/meals/${meal.idMeal}`}>
+                //   <a className="category-page__meals__cards__card shadow-2">
+                //     <div className="category-page__meals__cards__card-image">
+                //       <Image
+                //         src={meal.strMealThumb}
+                //         layout="fill"
+                //         objectFit="cover"
+                //       />
+                //     </div>
+                //     <h3>{meal.strMeal}</h3>
+                //   </a>
+                // </Link>
               );
             })}
           </div>
