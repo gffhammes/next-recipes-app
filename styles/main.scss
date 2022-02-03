@@ -279,7 +279,7 @@ li {
 .ingredient-page,
 .category-page {
   padding: 2rem 0;
-  height: calc(100vh - 9rem);
+  height: calc(100vh - 4.5rem - 4.5rem);
   overflow: scroll;
 
   &__meals {
@@ -311,6 +311,34 @@ li {
         align-items: center;
       }
     }
+  }
+}
+
+.all-meals-page {
+  padding: 2rem 0;
+  height: calc(100vh - 4.5rem - 4.5rem - 3rem);
+  overflow: scroll;
+  &__meals {
+    &__cards {
+      display: grid;
+      row-gap: 1rem;
+    }
+  }
+}
+.meals-letters-menu {
+  background-color: #f4f4f4;
+  top: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8d8d8d;
+  z-index: 100;
+
+
+  .current-letter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 2rem;
   }
 }
 
