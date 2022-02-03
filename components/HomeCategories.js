@@ -7,7 +7,7 @@ function HomeCategories({ data }) {
     <div className="home__categories container">
       <div className="home__categories-title title">
         <h2>Main Categories</h2>
-        <Link href="/">
+        <Link href="categories">
           <a>See all</a>
         </Link>
       </div>

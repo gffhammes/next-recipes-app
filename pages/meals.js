@@ -6,16 +6,25 @@ import FooterMenu from "../components/FooterMenu";
 import MealCard from "../components/MealCard";
 
 export async function getServerSideProps({ query }) {
+  var thisLetter = query.init;
+
+  if (thisLetter.charCodeAt(0) < 97 || thisLetter.charCodeAt(0) > 122) {
+    thisLetter = "a";
+  }
+
   const resMeals = await fetch(
-    `http://www.themealdb.com/api/json/v1/1/search.php?f=${query.init}`
+    `http://www.themealdb.com/api/json/v1/1/search.php?f=${thisLetter}`
   );
   const mealsData = await resMeals.json();
-  const thisLetter = query.init;
 
   return { props: { mealsData, thisLetter } };
 }
 
 function nextChar(c) {
+  if (c.charCodeAt(0) < 97 || c.charCodeAt(0) > 122) {
+    return "a";
+  }
+
   if (c === "z") {
     return "a";
   } else {
@@ -24,6 +33,10 @@ function nextChar(c) {
 }
 
 function prevChar(c) {
+  if (c.charCodeAt(0) < 97 || c.charCodeAt(0) > 122) {
+    return "z";
+  }
+
   if (c === "a") {
     return "z";
   } else {
@@ -59,10 +72,10 @@ export default function Meals({ mealsData, thisLetter }) {
       <div className="all-meals-page">
         <div className="all-meals-page__meals container">
           <div className="all-meals-page__meals__cards">
-            {mealsData.meals &&
+            {mealsData.meals ?
               mealsData.meals.map((meal) => {
                 return <MealCard key={meal.idMeal} meal={meal} />;
-              })}
+              }) : <div>No meals</div>}
           </div>
         </div>
       </div>

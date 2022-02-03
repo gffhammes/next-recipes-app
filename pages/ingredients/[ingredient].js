@@ -109,7 +109,7 @@ function Ingredient({ data, strIngredient, index }) {
         <div className="category-page__meals container">
           <div className="category-page__meals__cards">
             {!data.meals ? (
-              <div>No recipes</div>
+              <div>No meals</div>
             ) : (
               data.meals.map((meal) => {
                 return <MealCard meal={meal} />;
