@@ -7,7 +7,7 @@ function HomeIngredients({ data }) {
     <div className="home__ingredients container">
       <div className="home__ingredients-title title">
         <h2>Popular Ingredients</h2>
-        <Link href="/">
+        <Link href="ingredients">
           <a>See all</a>
         </Link>
       </div>

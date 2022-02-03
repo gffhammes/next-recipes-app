@@ -64,21 +64,11 @@ li {
     a {
       font-weight: bold;
       color: #67a936;
+      white-space: nowrap;
     }
   }
 
   &__meals {
-    // &-title {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: space-between;
-
-    //   a {
-    //     font-weight: bold;
-    //     color: #67a936;
-    //   }
-    //}
-
     &-meals {
       padding: 0 1rem;
       width: fit-content;
@@ -339,16 +329,21 @@ li {
   }
 }
 
-.all-categories-page {
+.all-categories-page,
+.all-ingredients-page {
   padding: 2rem 0;
   height: calc(100vh - 4.5rem - 4.5rem);
   overflow: scroll;
-  &__categories {
+  &__categories,
+  &__ingredients {
     &__cards {
       display: grid;
+      grid-template-columns: 1fr;
       row-gap: 1rem;
+      column-gap: 1rem;
 
-      .category-card {
+      .category-card,
+      .ingredient-card {
         width: 100%;
         position: relative;
         border-radius: 0.5rem;

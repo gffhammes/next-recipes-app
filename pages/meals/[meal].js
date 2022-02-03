@@ -110,7 +110,8 @@ function Meal({ data }) {
           <div className="meal-page__general container">
             <h1 className="meal-name">{data.meals[0].strMeal}</h1>
             <span className="meal-category">
-              {typeof data.meals[0].strArea != "undefined"
+              {typeof data.meals[0].strArea != "undefined" &&
+              data.meals[0].strArea != "Unknown"
                 ? data.meals[0].strArea
                 : ""}{" "}
               {data.meals[0].strCategory}

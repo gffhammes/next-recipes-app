@@ -1,20 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import AppContext from "../AppContext";
 import CategoryCard from "../components/CategoryCard";
 import FooterMenu from "../components/FooterMenu";
-import MealCard from "../components/MealCard";
-
-// export async function getServerSideProps() {
-// const resCategories = await fetch(
-//   `https://www.themealdb.com/api/json/v1/1/categories.php`
-// );
-// const categoriesData = await resCategories.json();
-// return { props: { categoriesData } };
-// }
 
 export default function Categories() {
   const { categoriesData } = useContext(AppContext);
