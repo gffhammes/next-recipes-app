@@ -22,19 +22,19 @@ export default function Ingredients() {
   const loadMoreIngredients = () => {
     const newIngredients = [];
 
-    ingredientsData.meals.slice(offset, offset + 20).forEach((ingredient) => {
+    ingredientsData.meals.slice(offset, offset + 24).forEach((ingredient) => {
       newIngredients.push(ingredient);
     });
 
     setIngredients((oldIngredients) => [...oldIngredients, ...newIngredients]);
 
-    offset += 20;
+    offset += 24;
   };
 
   const handleScroll = (element) => {
     const elementHeight = element.scrollHeight - element.offsetHeight;
     const { scrollTop } = element;
-    if (scrollTop + 1 >= elementHeight) {
+    if (scrollTop + 80 >= elementHeight) {
       sleep(1000);
       loadMoreIngredients();
     }
@@ -64,17 +64,16 @@ export default function Ingredients() {
       <div className="all-ingredients-page" id="all-ingredients-page">
         <div className="all-ingredients-page__ingredients container">
           <div className="all-ingredients-page__ingredients__cards">
-            {Array.from(ingredients).map((ingredient) => {
+            {Array.from(ingredients).map((ingredient, index) => {
               return (
                 <IngredientCard
                   ingredient={ingredient}
-                  key={ingredient.idIngredient}
+                  key={index}
                 />
               );
             })}
-
-            <div className="loading">Loading...</div>
           </div>
+          <div className="loading">Loading...</div>
         </div>
       </div>
       <FooterMenu />
