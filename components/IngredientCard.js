@@ -3,14 +3,11 @@ import Link from "next/link";
 import React from "react";
 
 function IngredientCard(ingredient) {
-
   ingredient = ingredient.ingredient;
 
   return (
     <Link
-      href={`ingredients/${ingredient.strIngredient.toLowerCase()}-${
-        ingredient.idIngredient
-      }`}
+      href={`ingredients/${ingredient.strIngredient}-${ingredient.idIngredient}`}
     >
       <a className="ingredient-card">
         <div className="cover-gradient"></div>
