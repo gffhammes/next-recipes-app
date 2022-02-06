@@ -33,13 +33,7 @@ function nextChar(c) {
   }
 }
 
-export default function Meals(
-  {
-    /*mealsData, thisLetter*/
-  }
-) {
-  const nextSlug = "/"; //`/meals?init=${nextChar(thisLetter)}`;
-  const prevSlug = "/"; //`/meals?init=${prevChar(thisLetter)}`;
+export default function Meals() {
   let init = "a";
 
   const [meals, setMeals] = useState([]);

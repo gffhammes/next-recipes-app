@@ -55,8 +55,8 @@ export default function Home({ mealsData }) {
       <Head>
         <title>Next Recipes App</title>
       </Head>
-      <div className="home">
         <SearchBox />
+      <div className="home">
         <HomeMeals data={mealsData} />
         <HomeCategories data={categoriesData} />
         <HomeIngredients data={ingredientsData} />

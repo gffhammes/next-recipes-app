@@ -7,7 +7,7 @@ function HomeMeals({ data }) {
     <div className="home__meals">
       <div className="home__meals-title title container">
         <h2>Random Meals</h2>
-        <Link href="meals?init=a">
+        <Link href="meals">
           <a>See all</a>
         </Link>
       </div>
