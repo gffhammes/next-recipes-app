@@ -33,7 +33,7 @@ export async function getServerSideProps(ctx) {
         });
         i++;
       }
-    } while (i < 5);
+    } while (i < 6);
 
     nookies.set(ctx, "RANDOM_MEALS", JSON.stringify(mealsData), {
       maxAge: 5 * 60,
@@ -55,7 +55,7 @@ export default function Home({ mealsData }) {
       <Head>
         <title>Next Recipes App</title>
       </Head>
-        <SearchBox />
+      <SearchBox />
       <div className="home">
         <HomeMeals data={mealsData} />
         <HomeCategories data={categoriesData} />
