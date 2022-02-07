@@ -25,19 +25,9 @@ function HomeMeals({ data }) {
     setWindowWidth(w);
   };
 
-  // function vw(v) {
-  //   if (clientSide) {
-  //     var w = Math.max(
-  //       document.documentElement.clientWidth,
-  //       window.innerWidth || 0
-  //     );
-  //     return (v * w) / 100;
-  //   }
-  // }
-
   return (
-    <div className="home__meals">
-      <div className="home__meals-title title container">
+    <div className="home__meals container">
+      <div className="home__meals-title title">
         <h2>Random Meals</h2>
         {!(windowWidth > 960) && (
           <Link href="meals">
@@ -46,7 +36,7 @@ function HomeMeals({ data }) {
         )}
       </div>
 
-      <div className="home__meals-meals-wrapper container">
+      <div className="home__meals-meals-wrapper">
         <div className="home__meals-meals">
           {data.map((meal, index) => {
             return (
@@ -73,9 +63,9 @@ function HomeMeals({ data }) {
           })}
           {windowWidth > 960 && (
             <Link href={`meals`}>
-              <a className="home__meals-meal-wrapper shadow-2">
+              <a className="home__meals-meal-wrapper">
                 <div className="meal-card-content see-all">
-                  <h3 className="meal-name">See all</h3>
+                  <span>See all</span>
                 </div>
               </a>
             </Link>

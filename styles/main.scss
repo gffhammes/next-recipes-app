@@ -127,6 +127,9 @@ li {
       position: relative;
       border-radius: 1rem;
 
+      &:hover {
+      }
+
       &:not(:last-child) {
         margin-right: 1rem;
       }
@@ -138,7 +141,7 @@ li {
       .meal-card-cover-gradient {
         position: absolute;
         z-index: 5;
-        background: linear-gradient(#16161600 40%, #161616);
+        background: linear-gradient(#16161600 30%, #161616);
         height: 100%;
         width: 100%;
         border-radius: 1rem;
@@ -165,8 +168,8 @@ li {
     &-categories {
       display: grid;
       grid-template-columns: 1fr;
-      row-gap: 0.5rem;
-      column-gap: 0.5rem;
+      row-gap: 1rem;
+      column-gap: 1rem;
 
       .category-card {
         padding: 0.5rem 1rem;
@@ -185,11 +188,13 @@ li {
     }
 
     .ingredient-card {
+      background-color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 1rem;
+      border-radius: 0.5rem;
 
       .ingredient-image {
         position: relative;
@@ -519,8 +524,26 @@ li {
   }
 }
 
+@media screen and (min-width: 575px) {
+  .home {
+    &__categories {
+      &-categories {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    &__ingredients {
+      &-ingredients {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 960px) {
   .home {
+    row-gap: 5rem;
+
     &__meals {
       &-meals {
         display: grid;
@@ -530,6 +553,9 @@ li {
         grid-template-columns: 2fr repeat(3, 1fr);
         row-gap: 1rem;
         column-gap: 1rem;
+        padding: 0;
+        margin: 0;
+        width: 100%;
       }
 
       &-meal-wrapper {
@@ -540,7 +566,7 @@ li {
         &#index-0 {
           grid-area: a;
           height: 21.4rem;
-          width: 21.4rem;
+          width: 100%; //21.4rem;
 
           .meal-card-content {
             .meal-name {
@@ -550,6 +576,7 @@ li {
         }
 
         &:not(:last-child) {
+          margin: 0;
         }
 
         .meal-card-image {
@@ -561,8 +588,59 @@ li {
         .meal-card-content {
           &.see-all {
             border-radius: 1rem;
-            background-color: #67a936;
+            border: 1px solid #67a936;
+            color: #67a936;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-out;
+
+            &:hover {
+              background-color: rgba(104, 169, 54, 0.2);
+            }
           }
+        }
+      }
+    }
+
+    &__categories {
+      &-categories {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        .category-card.see-all {
+          border: 1px solid #67a936;
+          background-color: transparent;
+          color: #67a936;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease-out;
+
+          &:hover {
+            background-color: rgba(104, 169, 54, 0.2);
+          }
+        }
+      }
+    }
+
+    &__ingredients {
+      &-ingredients {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .ingredient-card.see-all {
+        border: 1px solid #67a936;
+        background-color: transparent;
+        color: #67a936;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease-out;
+
+        &:hover {
+          background-color: rgba(104, 169, 54, 0.2);
+        }
+        .ingredient-image {
         }
       }
     }
